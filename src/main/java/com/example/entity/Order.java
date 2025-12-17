@@ -22,11 +22,16 @@ import lombok.NoArgsConstructor;
 public class Order {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name="user_id")
 	private User user;
+	
+	private LocalDate deadline; 
+		
+	@Enumerated(EnumType.STRING)
+	private Status status;
 	
 	@Enumerated(EnumType.STRING)
 	private Blat blat;
@@ -40,7 +45,15 @@ public class Order {
 	@Column(name="mesaj_tort")
 	private String mesajTort;
 	
-	private LocalDate deadline;
+	public void setStatus(Status status)
+	{
+		this.status=status;
+	}
+	
+	public void setUser(User user)
+	{
+		this.user=user;
+	}	
 	
 	
 }

@@ -29,7 +29,7 @@ public class User {
 	private String cnp;
 	@Column(name="data_nasterii")
 	private LocalDate dataNasterii;
-	@Column(name="nr_telefon")
+	@Column(name="nr_telefon",unique = true)
 	private String nrTelefon;
 	@Enumerated(EnumType.STRING)
 	private Rol rol;
