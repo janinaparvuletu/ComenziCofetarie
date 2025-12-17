@@ -1,6 +1,7 @@
 package com.example.service;
 
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Rol;
@@ -12,10 +13,13 @@ import java.util.List;
 public class UserService {
 	
 	private final UserRepository userRepository;
+	private final PasswordEncoder passwordEncoder;
+
 	
 	//constructor (injectare dependințe)
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder=passwordEncoder;
     }
     
     public List<User> findEmployees(){
@@ -44,7 +48,8 @@ public class UserService {
             throw new IllegalArgumentException("email-ul introdus este gresit!");
         if (userRepository.existsByEmail(user.getEmail()))
             throw new IllegalArgumentException("exista deja un cont cu acest email!");
-
+        
+        user.setPassword(passwordEncoder.encode(user.getPassword()));//
         return userRepository.save(user);
     }
 
