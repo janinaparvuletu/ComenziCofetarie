@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<h2>Plasează comandă (CLIENT)</h2>
+
+<div th:if="${error}" style="color:red; margin:10px 0;" th:text="${error}"></div>
+<div th:if="${success}" style="color:green; margin:10px 0;" th:text="${success}"></div>
+
+<form th:action="@{/orders/new}" method="post" th:object="${order}">
+
+  <label>Deadline:</label><br>
+  <input type="date" th:field="*{deadline}" required><br><br>
+
+  <label>Blat:</label><br>
+  <select th:field="*{blat}" required>
+    <option th:value="ALB">ALB</option>
+    <option th:value="MARO">MARO</option>
+    <option th:value="ROZ">ROZ</option>
+    <option th:value="MULTICOLOR">MULTICOLOR</option>
+  </select>
+  <br><br>
+
+  <label>Cremă:</label><br>
+  <select th:field="*{crema}" required>
+    <option th:value="CIOCOLATA">CIOCOLATA</option>
+    <option th:value="VANILIE">VANILIE</option>
+    <option th:value="CARAMEL">CARAMEL</option>
+    <option th:value="CAPSUNI">CAPSUNI</option>
+    <option th:value="FRUCTE">FRUCTE</option>
+  </select>
+  <br><br>
+
+  <label>Glazură:</label><br>
+  <select th:field="*{glazura}" required>
+    <option th:value="FRISCA">FRISCA</option>
+    <option th:value="MARTIPAN">MARTIPAN</option>
+  </select>
+  <br><br>
+
+  <label>Mesaj pe tort (max 50):</label><br>
+  <input type="text" th:field="*{mesajTort}" maxlength="50"><br><br>
+
+  <button type="submit">Trimite comanda</button>
+</form>
+
+</body>
+</html>

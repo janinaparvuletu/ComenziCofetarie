@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+
+<div th:fragment="navbar">
+  <div style="display:flex; gap:12px; padding:10px; border-bottom:1px solid #666; align-items:center;">
+
+    <!-- CLIENT vede doar Orders -->
+    <span sec:authorize="hasRole('CLIENT')">
+      <a th:href="@{/orders}">Orders</a>
+    </span>
+
+    <!-- ANGAJAT + MANAGER vad Orders -->
+    <span sec:authorize="hasAnyRole('ANGAJAT','MANAGER')">
+      <a th:href="@{/orders}">Orders</a>
+    </span>
+
+    <!-- Users: MANAGER + ANGAJAT -->
+    <span sec:authorize="hasAnyRole('MANAGER','ANGAJAT')">
+      <a th:href="@{/users/add}">Adaugă user</a>
+    </span>
+
+    <!-- doar MANAGER -->
+    <span sec:authorize="hasRole('MANAGER')">
+      <a th:href="@{/users/employees}">Angajați</a>
+      <a th:href="@{/users/password}">Schimbă parolă</a>
+      <a th:href="@{/users/search}">Caută user</a>
+    </span>
+
+    <!-- partea din dreapta -->
+    <span style="margin-left:auto; display:flex; gap:10px; align-items:center;">
+
+      <!-- dacă ești LOGATĂ -->
+      <span sec:authorize="isAuthenticated()">
+        Logat ca: <b sec:authentication="name"></b>
+        <form th:action="@{/logout}" method="post" style="display:inline; margin-left:8px;">
+          <button type="submit">Logout</button>
+        </form>
+      </span>
+
+      <!-- dacă NU ești logată -->
+      <span sec:authorize="isAnonymous()">
+        <a th:href="@{/login}">Login</a>
+        <a th:href="@{/register}">Register</a>
+      </span>
+
+    </span>
+
+  </div>
+</div>
+
+</body>
+</html>

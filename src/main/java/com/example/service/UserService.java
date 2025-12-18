@@ -56,28 +56,28 @@ public class UserService {
     
     
     
-    public void deleteUser(User user)
-    {
-    	if(!userRepository.existsByCnp(user.getCnp()))
-    		throw new IllegalArgumentException("nu exista acest utilizator!");
-    	
-    	userRepository.deleteByCnp(user.getCnp());
+    public void deleteUserByCnp(String cnp) {
+        if (cnp == null || cnp.length() != 13)
+            throw new IllegalArgumentException("cnp invalid!");
+        if (!userRepository.existsByCnp(cnp))
+            throw new IllegalArgumentException("nu exista acest utilizator!");
+        userRepository.deleteByCnp(cnp);
     }
+
     
     
     
-    public User changePassword(String cnp, String password)
-    {
-    	User user = userRepository.findByCnp(cnp)
-    			.orElseThrow(()->new IllegalArgumentException("nu exista acest utilizator!"));
-    	
-    	if(!passwordValidation(password))
-    		throw new IllegalArgumentException("parola nu e suficient de complexa!");
-    	
-    	user.setPassword(password);
-    	return userRepository.save(user);
+    public User changePasswordByEmail(String email, String password) {
+        User user = userRepository.findByEmail(email)
+            .orElseThrow(() -> new IllegalArgumentException("Nu există user cu acest email!"));
+
+        if (!passwordValidation(password))
+            throw new IllegalArgumentException("Parola nu este suficient de complexă!");
+
+        user.setPassword(passwordEncoder.encode(password));
+        return userRepository.save(user);
     }
-    
+
     
     
     private boolean passwordValidation(String password) {

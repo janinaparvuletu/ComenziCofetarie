@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<h2>Eroare</h2>
+<p>Status: <span th:text="${status}"></span></p>
+<p><span th:text="${error}"></span></p>
+
+<a th:href="@{/dashboard}">Înapoi</a>
+
+</body>
+</html>

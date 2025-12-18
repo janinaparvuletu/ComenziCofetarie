@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<h2>Adaugă user</h2>
+
+<div th:if="${error}" style="color:red; margin:10px 0;" th:text="${error}"></div>
+<div th:if="${success}" style="color:green; margin:10px 0;" th:text="${success}"></div>
+
+<form th:action="@{/users/add}" method="post" th:object="${user}">
+  <label>Username:</label><br>
+  <input type="text" th:field="*{username}" required><br><br>
+
+  <label>Email:</label><br>
+  <input type="email" th:field="*{email}" required><br><br>
+
+  <label>Parolă:</label><br>
+  <input type="password" th:field="*{password}" required><br><br>
+
+  <label>CNP:</label><br>
+  <input type="text" th:field="*{cnp}" maxlength="13" required><br><br>
+
+  <label>Telefon:</label><br>
+  <input type="text" th:field="*{nrTelefon}" required><br><br>
+
+  <!-- MANAGER: alege rol -->
+  <div sec:authorize="hasRole('MANAGER')">
+    <label>Rol:</label><br>
+    <select th:field="*{rol}">
+      <option th:value="CLIENT">CLIENT</option>
+      <option th:value="ANGAJAT">ANGAJAT</option>
+      <option th:value="MANAGER">MANAGER</option>
+    </select>
+    <br><br>
+  </div>
+
+  <!-- ANGAJAT: rol blocat CLIENT -->
+  <div sec:authorize="hasRole('ANGAJAT')">
+    <input type="hidden" th:field="*{rol}" value="CLIENT">
+    <p style="color:#666;">Ca ANGAJAT poți înregistra doar clienți.</p>
+  </div>
+
+  <button type="submit">Creează</button>
+</form>
+
+</body>
+</html>

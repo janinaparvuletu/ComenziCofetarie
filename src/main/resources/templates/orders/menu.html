@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<h2>Orders</h2>
+
+<!-- CLIENT: doar functionalitatea lui -->
+<div sec:authorize="hasRole('CLIENT')">
+  <button onclick="location.href='/orders/new'">Plasează comandă</button>
+  <button onclick="location.href='/orders/my'">Comenzile mele</button>
+</div>
+
+<!-- ANGAJAT + MANAGER -->
+<div sec:authorize="hasAnyRole('ANGAJAT','MANAGER')">
+  <button onclick="location.href='/orders/all'">Toate comenzile</button>
+  <button onclick="location.href='/orders/search-user'">Caută comenzi după user</button>
+</div>
+
+</body>
+</html>

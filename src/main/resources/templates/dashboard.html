@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<h2>Dashboard</h2>
+
+<p>Bine ai venit în aplicația Cofetărie!</p>
+
+<ul>
+  <li><a th:href="@{/orders}">Gestionare comenzi</a></li>
+  <li><a th:href="@{/users/add}">Adaugă utilizator</a></li>
+</ul>
+
+</body>
+</html>

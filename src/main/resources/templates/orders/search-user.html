@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<h2>Caută comenzi după user (ANGAJAT / MANAGER)</h2>
+
+<form th:action="@{/orders/by-user}" method="get">
+  <label>Username:</label><br>
+  <input type="text" name="username" required><br><br>
+
+  <label>Telefon:</label><br>
+  <input type="text" name="nrTelefon" required><br><br>
+
+  <button type="submit">Caută</button>
+</form>
+
+</body>
+</html>

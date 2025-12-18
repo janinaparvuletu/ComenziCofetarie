@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:replace="fragments/navbar :: body"></div>
+
+<h2>Caută comandă după ID</h2>
+
+<form id="f">
+  <label>ID:</label><br>
+  <input type="number" id="id"><br><br>
+  <button type="button" onclick="go()">Caută</button>
+</form>
+
+<script>
+  function go() {
+    const id = document.getElementById("id").value;
+    if (!id) return;
+    window.location.href = "/orders/" + id;
+  }
+</script>
+
+</body>
+</html>

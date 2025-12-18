@@ -12,9 +12,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @Getter
+@Setter
 @Entity
 @Table(name="users")
 public class User {
@@ -34,8 +36,21 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private Rol rol;
 	
-	public void setPassword(String password)
-	{
-		this.password=password;
+	
+	
+	//implementat pt testere
+	public User(
+	        String username,
+	        String email,
+	        String cnp,
+	        String nrTelefon,
+	        Rol rol
+	) {
+	    this.username = username;
+	    this.email = email;
+	    this.cnp = cnp;
+	    this.nrTelefon = nrTelefon;
+	    this.rol = rol;
 	}
+
 }

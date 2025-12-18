@@ -10,5 +10,5 @@ import com.example.entity.Status;
 public interface OrderRepository extends JpaRepository<Order, Integer>{
 	List <Order> findByUserUsernameAndUserNrTelefon(String username, String nrTelefon);
 	List <Order> findByStatus(Status status);
-	
+	List<Order> findByUserEmail(String email);
 }

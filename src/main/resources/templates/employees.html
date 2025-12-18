@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<h2>Angajați</h2>
+
+<div th:if="${error}" style="color:red;" th:text="${error}"></div>
+<div th:if="${success}" style="color:green;" th:text="${success}"></div>
+
+<div th:if="${#lists.isEmpty(employees)}" style="margin:10px 0; color:#555;">
+  Nu există angajați.
+</div>
+
+<table th:if="${!#lists.isEmpty(employees)}" border="1" cellpadding="6" cellspacing="0">
+  <tr>
+    <th>ID</th><th>Username</th><th>Email</th><th>CNP</th><th>Telefon</th><th>Rol</th>
+  </tr>
+  <tr th:each="u : ${employees}">
+    <td th:text="${u.id}"></td>
+    <td th:text="${u.username}"></td>
+    <td th:text="${u.email}"></td>
+    <td th:text="${u.cnp}"></td>
+    <td th:text="${u.nrTelefon}"></td>
+    <td th:text="${u.rol}"></td>
+  </tr>
+</table>
+
+</body>
+</html>

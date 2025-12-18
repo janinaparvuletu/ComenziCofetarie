@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<h2>Detalii comandă</h2>
+
+<div th:if="${error}" style="color:red; margin:10px 0;" th:text="${error}"></div>
+<div th:if="${success}" style="color:green; margin:10px 0;" th:text="${success}"></div>
+
+<p><b>ID:</b> <span th:text="${order.id}"></span></p>
+<p><b>Client:</b> <span th:text="${order.user.username}"></span></p>
+<p><b>Telefon:</b> <span th:text="${order.user.nrTelefon}"></span></p>
+<p><b>Deadline:</b> <span th:text="${order.deadline}"></span></p>
+<p><b>Status:</b> <span th:text="${order.status}"></span></p>
+<p><b>Blat:</b> <span th:text="${order.blat}"></span></p>
+<p><b>Cremă:</b> <span th:text="${order.crema}"></span></p>
+<p><b>Glazură:</b> <span th:text="${order.glazura}"></span></p>
+<p><b>Mesaj:</b> <span th:text="${order.mesajTort}"></span></p>
+
+<hr>
+
+<!-- doar ANGAJAT/MANAGER pot schimba status -->
+<div sec:authorize="hasAnyRole('ANGAJAT','MANAGER')">
+  <h3>Schimbă status</h3>
+  <form th:action="@{/orders/{id}/status(id=${order.id})}" method="post">
+    <select name="status">
+      <option th:each="s : ${statuses}" th:value="${s}" th:text="${s}"></option>
+    </select>
+    <button type="submit">Actualizează</button>
+  </form>
+</div>
+
+<br>
+<a th:href="@{/orders/all}">Înapoi</a>
+
+</body>
+</html>

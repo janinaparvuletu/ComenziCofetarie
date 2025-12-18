@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<h2>Creează cont (CLIENT)</h2>
+
+<div th:if="${error}" style="color:red; margin:10px 0;" th:text="${error}"></div>
+<div th:if="${success}" style="color:green; margin:10px 0;" th:text="${success}"></div>
+
+<form th:action="@{/register}" method="post" th:object="${user}">
+  <label>Username:</label><br>
+  <input type="text" th:field="*{username}" required><br><br>
+
+  <label>Email:</label><br>
+  <input type="email" th:field="*{email}" required><br><br>
+
+  <label>Telefon:</label><br>
+  <input type="text" th:field="*{nrTelefon}" required><br><br>
+
+  <label>CNP:</label><br>
+  <input type="text" th:field="*{cnp}" maxlength="13" required><br><br>
+
+  <label>Parolă:</label><br>
+  <input type="password" th:field="*{password}" required><br><br>
+
+  <button type="submit">Creează cont</button>
+</form>
+
+<p style="color:#666; font-size:13px;">
+  Parola: min 8 caractere, 1 literă mică, 1 literă mare, 1 cifră, 1 simbol.
+</p>
+
+<p>
+  Ai deja cont? <a th:href="@{/login}">Login</a>
+</p>
+
+</body>
+</html>

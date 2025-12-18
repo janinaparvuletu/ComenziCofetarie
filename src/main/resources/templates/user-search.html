@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<h2>Caută user (doar MANAGER)</h2>
+
+<form th:action="@{/users/search}" method="get">
+  <label>Username:</label><br>
+  <input type="text" name="username" placeholder="ex: ana"><br><br>
+  <button type="submit">Caută</button>
+</form>
+
+<br>
+
+<div th:if="${results != null and #lists.isEmpty(results)}" style="color:#555;">
+  Nu există utilizatori cu acest username.
+</div>
+
+<table th:if="${results != null and !#lists.isEmpty(results)}" border="1" cellpadding="6">
+  <tr>
+    <th>ID</th><th>Username</th><th>Email</th><th>Telefon</th><th>Rol</th>
+  </tr>
+  <tr th:each="u : ${results}">
+    <td th:text="${u.id}"></td>
+    <td th:text="${u.username}"></td>
+    <td th:text="${u.email}"></td>
+    <td th:text="${u.nrTelefon}"></td>
+    <td th:text="${u.rol}"></td>
+  </tr>
+</table>
+
+</body>
+</html>

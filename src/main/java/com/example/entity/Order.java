@@ -14,9 +14,11 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @Getter
+@Setter
 @Entity
 @Table(name="orders")
 public class Order {
@@ -55,5 +57,22 @@ public class Order {
 		this.user=user;
 	}	
 	
+	//implementat pt testere
+	public Order(
+	        User user,
+	        LocalDate deadline,
+	        Blat blat,
+	        Crema crema,
+	        Glazura glazura,
+	        String mesajTort
+	) {
+	    this.user = user;
+	    this.deadline = deadline;
+	    this.blat = blat;
+	    this.crema = crema;
+	    this.glazura = glazura;
+	    this.mesajTort = mesajTort; // poate fi null, e OK
+	}
+
 	
 }
